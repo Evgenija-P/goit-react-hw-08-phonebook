@@ -6,8 +6,8 @@ import { Layout } from '../Layout';
 import { selectIsRefreshing } from 'redux/auth/selectors';
 import { AppWrapper } from './App.styled';
 
-// import { RestrictedRoute } from 'components/RestrictedRoute';
-// import { PrivateRoute } from 'components/PrivateRoute';
+import { RestrictedRoute } from 'components/RestrictedRoute';
+import { PrivateRoute } from 'components/PrivateRoute';
 import { refreshUser } from 'redux/auth/operations';
 import { NotFoundPage } from 'pages/NotFoundPage';
 import { Home } from 'pages/Home';
@@ -15,10 +15,10 @@ import Register from 'pages/Register';
 import Login from 'pages/Login';
 import Contacts from 'pages/Contacts';
 
-// const HomePage = lazy(() => import('pages/Home'));
-// const RegisterPage = lazy(() => import('pages/Register'));
-// const LoginPage = lazy(() => import('pages/Login'));
-// const TasksPage = lazy(() => import('pages/Contacts'));
+// const Home = lazy(() => import('pages/Home'));
+// const Register = lazy(() => import('pages/Register'));
+// const Login = lazy(() => import('pages/Login'));
+// const Contacts = lazy(() => import('pages/Contacts'));
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -35,9 +35,27 @@ export const App = () => {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="/contacts" element={<Contacts />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
+          <Route
+            path="/contacts"
+            element={
+              <PrivateRoute redirectTo="/login" component={<Contacts />} />
+            }
+          />
+          <Route
+            path="/register"
+            element={
+              <RestrictedRoute
+                redirectTo="/contacts"
+                component={<Register />}
+              />
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <RestrictedRoute redirectTo="/contacts" component={<Login />} />
+            }
+          />
 
           <Route path="*" element={<NotFoundPage />} />
         </Route>

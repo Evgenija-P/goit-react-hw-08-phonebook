@@ -12,7 +12,7 @@ export const ContactForm = () => {
   const nameId = nanoid(3);
   const numberId = nanoid(3);
   const { contacts } = useSelector(selectContacts);
-  const [nameForm, setNameForm] = useState('');
+  const [name, setNameForm] = useState('');
   const [number, setNumber] = useState('');
 
   const dispatch = useDispatch();
@@ -31,27 +31,17 @@ export const ContactForm = () => {
     if (contacts) {
       if (
         contacts.find(
-          contact => contact.name.toLowerCase() === nameForm.toLowerCase()
+          contact => contact.name.toLowerCase() === name.toLowerCase()
         )
       ) {
-        return alert(`${nameForm} is already in contacts.`);
+        return alert(`${name} is already in contacts.`);
       }
-      dispatch(addContact({ nameForm, number }));
+      dispatch(addContact({ name, number }));
+      console.log({ name, number });
       reset();
     }
 
     return;
-
-    // if (
-    //   contacts?.find(
-    //     contact => contact.name.toLowerCase() === nameForm.toLowerCase()
-    //   )
-    // ) {
-    //   return alert(`${nameForm} is already in contacts.`);
-    // }
-    // dispatch(addContact({ nameForm, number }));
-
-    // reset();
   };
 
   const reset = () => {
@@ -66,9 +56,10 @@ export const ContactForm = () => {
         <Input
           type="text"
           name="name"
-          value={nameForm}
+          value={name}
           id={nameId}
           placeholder="Name"
+          autocomplete="on"
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           required
@@ -81,6 +72,7 @@ export const ContactForm = () => {
           value={number}
           id={numberId}
           placeholder="Number"
+          autocomplete="on"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required
