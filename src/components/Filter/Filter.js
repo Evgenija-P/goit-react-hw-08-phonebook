@@ -1,20 +1,18 @@
 import React from 'react';
-import { setTextFilter } from 'redux/filtersSlice';
+import { setTextFilter } from 'redux/contacts/slice';
 import { useDispatch, useSelector } from 'react-redux';
 import { nanoid } from 'nanoid';
-// import PropTypes from 'prop-types';
 import { Label, Input, Title } from './Filter.styled';
-import { getValue } from 'redux/selectors';
+import { selectValue } from 'redux/contacts/selectors';
 
 // import { Button } from './FeedbackOptions.styled';
 
 export const Filter = () => {
-  const value = useSelector(getValue);
+  const value = useSelector(selectValue);
 
   const dispatch = useDispatch();
   const filretContacts = e => {
     dispatch(setTextFilter(e.currentTarget.value));
-    console.log(e.currentTarget.value);
   };
 
   const filterId = nanoid(3);
