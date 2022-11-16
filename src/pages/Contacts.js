@@ -9,7 +9,7 @@ import { ContactList } from 'components/ContactList/ContactList';
 import { Title, TitleContacts } from '../components/App/App.styled';
 import { fetchContacts } from 'redux/contacts/operations';
 
-export default function Tasks() {
+export default function Contacts() {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectLoading);
 

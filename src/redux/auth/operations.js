@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { toast } from 'react-toastify';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
@@ -11,17 +12,30 @@ const clearAuthHeader = () => {
   axios.defaults.headers.common.Authorization = '';
 };
 
+const options = {
+  position: 'top-center',
+  autoClose: 3000,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+  theme: 'dark',
+};
+
 export const register = createAsyncThunk(
   'auth/register',
   async (credentials, thunkAPI) => {
     try {
-      const res = await axios.post('/users/signup', credentials);
+      const response = await axios.post('/users/signup', credentials);
 
-      setAuthHeader(res.data.token);
-      console.log(res.data);
-      return res.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      setAuthHeader(response.data.token);
+      toast.success('Congratulations! You are registered!', options);
+      console.log(response.data);
+      return response.data;
+    } catch (e) {
+      toast.error('Please, try one more');
+      return thunkAPI.rejectWithValue(e.message);
     }
   }
 );
@@ -30,12 +44,12 @@ export const logIn = createAsyncThunk(
   'auth/login',
   async (credentials, thunkAPI) => {
     try {
-      const res = await axios.post('/users/login', credentials);
-
-      setAuthHeader(res.data.token);
-      return res.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      const response = await axios.post('/users/login', credentials);
+      setAuthHeader(response.data.token);
+      return response.data;
+    } catch (e) {
+      toast.error('Incorrect email or password. Please, try one more');
+      return thunkAPI.rejectWithValue(e.message);
     }
   }
 );
@@ -43,10 +57,9 @@ export const logIn = createAsyncThunk(
 export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   try {
     await axios.post('/users/logout');
-
     clearAuthHeader();
-  } catch (error) {
-    return thunkAPI.rejectWithValue(error.message);
+  } catch (e) {
+    return thunkAPI.rejectWithValue(e.message);
   }
 });
 
@@ -55,17 +68,16 @@ export const refreshUser = createAsyncThunk(
   async (_, thunkAPI) => {
     const state = thunkAPI.getState();
     const persistedToken = state.auth.token;
-
     if (persistedToken === null) {
       return thunkAPI.rejectWithValue('Unable to fetch user');
     }
 
     try {
       setAuthHeader(persistedToken);
-      const res = await axios.get('/users/me');
-      return res.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      const response = await axios.get('/users/me');
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
     }
   }
 );

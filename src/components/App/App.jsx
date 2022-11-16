@@ -1,18 +1,19 @@
 import React, { useEffect, lazy } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
-import { Layout } from '../Layout';
+import { ToastContainer, Flip } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import { selectIsRefreshing } from 'redux/auth/selectors';
-import { AppWrapper } from './App.styled';
+import { refreshUser } from 'redux/auth/operations';
 
 import { RestrictedRoute } from 'components/RestrictedRoute';
 import { PrivateRoute } from 'components/PrivateRoute';
-import { refreshUser } from 'redux/auth/operations';
+
 import { NotFoundPage } from 'pages/NotFoundPage';
-// import { Home } from 'pages/Home';
-// import Register from 'pages/Register';
-// import Login from 'pages/Login';
-// import Contacts from 'pages/Contacts';
+import { Layout } from '../Layout';
+import { AppWrapper } from './App.styled';
+import { Loader } from 'components/Loader/Loared';
 
 const Home = lazy(() => import('pages/Home'));
 const Register = lazy(() => import('pages/Register'));
@@ -28,7 +29,7 @@ export const App = () => {
   }, [dispatch]);
 
   return isRefreshing ? (
-    <b>Refreshing user...</b>
+    <Loader />
   ) : (
     <AppWrapper>
       <Routes>
@@ -59,6 +60,7 @@ export const App = () => {
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
+      <ToastContainer transition={Flip} />
     </AppWrapper>
   );
 };
