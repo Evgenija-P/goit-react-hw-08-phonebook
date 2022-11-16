@@ -1,46 +1,23 @@
-import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { BsTelephone, BsXCircle, BsAt } from 'react-icons/bs';
+import PropTypes from 'prop-types';
+import { BsTelephone } from 'react-icons/bs';
+import { MdOutlineDeleteForever } from 'react-icons/md';
 
-import {
-  Item,
-  Avatar,
-  ContactWrapper,
-  ButtonWrapper,
-  TelNumber,
-  Button,
-  Email,
-} from './Contact.styled';
-import { deleteContact } from 'redux/operations';
+import { Button } from '../ContactList/ContactList.styled';
+import { deleteContact } from 'redux/contacts/operations';
 
-export const Contact = ({ id, name, number, avatar, mail }) => {
+export const Contact = ({ id, name, number }) => {
   const dispatch = useDispatch();
   const handleDelete = () => dispatch(deleteContact(id));
-  const telNumber = 'tel:' + number;
-  const emailAdres = `mailto:` + mail;
-
   return (
-    <Item>
-      <ContactWrapper>
-        <Avatar src={avatar} alt={name} width="100" />
-        <div>
-          {name}: <p>{number}</p>
-        </div>
-      </ContactWrapper>
-
-      <ButtonWrapper>
-        <TelNumber href={telNumber}>
-          <BsTelephone size={33} />
-        </TelNumber>
-        <Email href={emailAdres}>
-          <BsAt size={38} />
-        </Email>
-
-        <Button type="button" onClick={handleDelete}>
-          <BsXCircle size={33} />
-        </Button>
-      </ButtonWrapper>
-    </Item>
+    <>
+      <p>
+        <BsTelephone size={24} color={'blue'} /> {name}: {number}
+      </p>
+      <Button type="button" onClick={handleDelete}>
+        <MdOutlineDeleteForever size={24} color={'blue'} />
+      </Button>
+    </>
   );
 };
 

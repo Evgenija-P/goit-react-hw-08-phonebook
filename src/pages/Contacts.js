@@ -1,23 +1,30 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { TaskList } from 'components/TaskList/TaskList';
-import { TaskEditor } from 'components/TaskEditor/TaskEditor';
-import { fetchTasks } from 'redux/tasks/operations';
-import { selectLoading } from 'redux/tasks/selectors';
+
+import { selectLoading } from 'redux/contacts/selectors';
+import { ContactForm } from 'components/ContactForm/ContactForm';
+import { Filter } from 'components/Filter/Filter';
+import { ContactList } from 'components/ContactList/ContactList';
+
+import { Title, TitleContacts } from '../components/App/App.styled';
+import { fetchContacts } from 'redux/contacts/operations';
 
 export default function Tasks() {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectLoading);
 
   useEffect(() => {
-    dispatch(fetchTasks());
+    dispatch(fetchContacts());
   }, [dispatch]);
 
   return (
     <>
-      <TaskEditor />
       <div>{isLoading && 'Request in progress...'}</div>
-      <TaskList />
+      <Title>Phonebook</Title>
+      <ContactForm />
+      <TitleContacts>Contacts</TitleContacts>
+      <Filter />
+      <ContactList />
     </>
   );
 }

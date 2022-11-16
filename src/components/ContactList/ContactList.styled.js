@@ -1,21 +1,20 @@
 import styled from '@emotion/styled';
 
 export const List = styled.ul`
+  width: 350px;
   font-size: 20px;
   padding-bottom: 20px;
 `;
 
 export const Item = styled.li`
   display: flex;
-
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 15px;
-  color: white;
+  margin-bottom: 5px;
 
   :focus,
   :hover {
-    color: purple;
+    color: blue;
   }
 `;
 

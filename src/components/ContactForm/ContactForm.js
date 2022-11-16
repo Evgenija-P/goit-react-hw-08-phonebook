@@ -1,17 +1,17 @@
+/* eslint-disable no-unused-expressions */
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { nanoid } from 'nanoid';
-import { BsPersonPlus } from 'react-icons/bs';
-import { toast } from 'react-toastify';
+import { AiOutlineUserAdd } from 'react-icons/ai';
+
 import { Form, Label, Input, Button } from './ContactForm.styled';
-import { addContact } from 'redux/operations';
-import { getContacts } from 'redux/selectors';
+import { addContact } from 'redux/contacts/operations';
+import { selectContacts } from 'redux/contacts/selectors';
 
 export const ContactForm = () => {
   const nameId = nanoid(3);
   const numberId = nanoid(3);
-  const contacId = nanoid(2);
-  const { contacts } = useSelector(getContacts);
+  const { contacts } = useSelector(selectContacts);
   const [nameForm, setNameForm] = useState('');
   const [number, setNumber] = useState('');
 
@@ -25,31 +25,33 @@ export const ContactForm = () => {
     setNumber(e.target.value);
   };
 
-  const options = {
-    position: 'top-center',
-    autoClose: 3000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    theme: 'dark',
-  };
-
   const handleSubmit = e => {
+    console.log(contacts);
     e.preventDefault();
-    if (
-      contacts.find(
-        contact => contact.name.toLowerCase() === nameForm.toLowerCase()
-      )
-    ) {
-      toast.error('Oh, such a contact already exists!', options);
-      return;
+    if (contacts) {
+      if (
+        contacts.find(
+          contact => contact.name.toLowerCase() === nameForm.toLowerCase()
+        )
+      ) {
+        return alert(`${nameForm} is already in contacts.`);
+      }
+      dispatch(addContact({ nameForm, number }));
+      reset();
     }
 
-    dispatch(addContact({ id: contacId, name: nameForm, phone: number }));
+    return;
 
-    reset();
+    // if (
+    //   contacts?.find(
+    //     contact => contact.name.toLowerCase() === nameForm.toLowerCase()
+    //   )
+    // ) {
+    //   return alert(`${nameForm} is already in contacts.`);
+    // }
+    // dispatch(addContact({ nameForm, number }));
+
+    // reset();
   };
 
   const reset = () => {
@@ -85,7 +87,7 @@ export const ContactForm = () => {
           onChange={handleChangeNumber}
         />
         <Button type="submit">
-          <BsPersonPlus size={33} />
+          <AiOutlineUserAdd size={24} color={'blue'} />
         </Button>
       </Form>
     </>

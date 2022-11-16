@@ -1,9 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {
-  fetchContacts,
-  addContact,
-  deleteContact,
-} from './contacts/operations';
+import { fetchContacts, addContact, deleteContact } from './operations';
 
 const contactsSlice = createSlice({
   name: 'contacts',
@@ -54,5 +50,24 @@ const contactsSlice = createSlice({
     },
   },
 });
+
+const filtersInitialText = {
+  text: '',
+};
+
+const filtersSlice = createSlice({
+  name: 'filters',
+  initialState: filtersInitialText,
+  reducers: {
+    setTextFilter: {
+      reducer(state, action) {
+        state.text = action.payload;
+      },
+    },
+  },
+});
+
+export const { setTextFilter } = filtersSlice.actions;
+export const filtersReducer = filtersSlice.reducer;
 
 export const contactsReducer = contactsSlice.reducer;

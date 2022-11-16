@@ -1,15 +1,15 @@
 import React from 'react';
-import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchContacts } from 'redux/operations';
+import { useEffect } from 'react';
 import { List, Item } from './ContactList.styled';
 import { Contact } from 'components/Contact/Contact';
-import { getContacts, getValue } from 'redux/selectors';
-import { Loader } from 'components/Loader/Loader';
+import { selectContacts, selectValue } from 'redux/contacts/selectors';
+import { fetchContacts } from 'redux/contacts/operations';
+import { Loader } from 'components/Loader/Loared';
 
 export const ContactList = () => {
-  const filter = useSelector(getValue);
-  const { contacts, isLoading, error } = useSelector(getContacts);
+  const filter = useSelector(selectValue);
+  const { contacts, isLoading, error } = useSelector(selectContacts);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -30,15 +30,9 @@ export const ContactList = () => {
       {isLoading && <Loader />}
       {error && <p>{error}</p>}
       {contacts &&
-        contactsState.map(({ id, name, phone, avatar, mail }) => (
+        contactsState.map(({ id, name, number }) => (
           <Item key={id}>
-            <Contact
-              id={id}
-              name={name}
-              number={phone}
-              avatar={avatar}
-              mail={mail}
-            />
+            <Contact id={id} name={name} number={number} />
           </Item>
         ))}
     </List>

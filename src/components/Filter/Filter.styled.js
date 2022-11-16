@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 
 export const Label = styled.label`
   font-size: 20px;
-  color: white;
+  color: blue;
   font-weight: 500;
 `;
 
@@ -16,7 +16,7 @@ export const Input = styled.input`
   width: 150px;
   height: 30px;
 
-  background-color: #e09ffc;
+  background-color: #e7e7e9;
   border: 1px solid rgba(33, 33, 33, 0.2);
   box-sizing: border-box;
   border-radius: 4px;
