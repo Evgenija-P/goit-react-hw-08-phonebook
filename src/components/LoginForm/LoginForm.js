@@ -1,6 +1,8 @@
 import { useDispatch } from 'react-redux';
+import { Button, Input } from '@chakra-ui/react';
+
 import { logIn } from 'redux/auth/operations';
-// import css from './LoginForm.module.css';
+import { FormWrapper, Label, TitleLabel } from './LoginForm.styled';
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
@@ -18,16 +20,36 @@ export const LoginForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} autoComplete="on">
-      <label>
-        Email
-        <input type="email" name="email" />
-      </label>
-      <label>
-        Password
-        <input type="password" name="password"  />
-      </label>
-      <button type="submit">Log In</button>
-    </form>
+    <FormWrapper onSubmit={handleSubmit} autoComplete="off">
+      <Label>
+        <TitleLabel>Email</TitleLabel>
+        <Input
+          placeholder="Enter Username"
+          colorScheme="whiteAlpha"
+          pr="10rem"
+          borderColor="purple"
+          width="auto"
+          variant="flushed"
+          type="email"
+          name="email"
+        />
+      </Label>
+      <Label>
+        <TitleLabel>Password</TitleLabel>
+        <Input
+          placeholder="Enter password"
+          colorScheme="whiteAlpha"
+          pr="10rem"
+          borderColor="purple"
+          width="auto"
+          variant="flushed"
+          type="password"
+          name="password"
+        />
+      </Label>
+      <Button colorScheme="whiteAlpha" type="submit" variant="outline">
+        Log In
+      </Button>
+    </FormWrapper>
   );
 };

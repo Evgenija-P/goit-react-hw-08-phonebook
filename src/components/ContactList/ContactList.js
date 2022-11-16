@@ -5,7 +5,7 @@ import { List, Item } from './ContactList.styled';
 import { Contact } from 'components/Contact/Contact';
 import { selectContacts, selectValue } from 'redux/contacts/selectors';
 import { fetchContacts } from 'redux/contacts/operations';
-import { Loader } from 'components/Loader/Loared';
+import { Loader } from 'components/Loader/Loader';
 
 export const ContactList = () => {
   const filter = useSelector(selectValue);

@@ -1,23 +1,41 @@
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import { BsTelephone } from 'react-icons/bs';
-import { MdOutlineDeleteForever } from 'react-icons/md';
+import { BsTelephone, BsXCircle } from 'react-icons/bs';
+import { IoPeopleCircleOutline } from 'react-icons/io5';
 
-import { Button } from '../ContactList/ContactList.styled';
+import {
+  Item,
+  ContactWrapper,
+  ButtonWrapper,
+  TelNumber,
+  Button,
+} from './Contact.styled';
 import { deleteContact } from 'redux/contacts/operations';
 
 export const Contact = ({ id, name, number }) => {
   const dispatch = useDispatch();
   const handleDelete = () => dispatch(deleteContact(id));
+  const telNumber = 'tel:' + number;
+
   return (
-    <>
-      <p>
-        <BsTelephone size={24} color={'blue'} /> {name}: {number}
-      </p>
-      <Button type="button" onClick={handleDelete}>
-        <MdOutlineDeleteForever size={24} color={'blue'} />
-      </Button>
-    </>
+    <Item>
+      <ContactWrapper>
+        <IoPeopleCircleOutline size={50} />
+        <div>
+          {name}: <p>{number}</p>
+        </div>
+      </ContactWrapper>
+
+      <ButtonWrapper>
+        <TelNumber href={telNumber}>
+          <BsTelephone size={33} />
+        </TelNumber>
+
+        <Button type="button" onClick={handleDelete}>
+          <BsXCircle size={33} />
+        </Button>
+      </ButtonWrapper>
+    </Item>
   );
 };
 

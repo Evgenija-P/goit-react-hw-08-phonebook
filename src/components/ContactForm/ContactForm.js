@@ -1,8 +1,7 @@
-/* eslint-disable no-unused-expressions */
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { nanoid } from 'nanoid';
-import { AiOutlineUserAdd } from 'react-icons/ai';
+import { BsPersonPlus } from 'react-icons/bs';
 
 import { Form, Label, Input, Button } from './ContactForm.styled';
 import { addContact } from 'redux/contacts/operations';
@@ -51,7 +50,7 @@ export const ContactForm = () => {
 
   return (
     <>
-      <Form onSubmit={handleSubmit} autoComplete="on">
+      <Form onSubmit={handleSubmit} autoComplete="off">
         <Label htmlFor={nameId}>Name</Label>
         <Input
           type="text"
@@ -77,7 +76,7 @@ export const ContactForm = () => {
           onChange={handleChangeNumber}
         />
         <Button type="submit">
-          <AiOutlineUserAdd size={24} color={'blue'} />
+          <BsPersonPlus size={33} />
         </Button>
       </Form>
     </>
