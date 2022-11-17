@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { nanoid } from 'nanoid';
 import { BsPersonPlus } from 'react-icons/bs';
 
-import { Form, Label, Input, Button } from './ContactForm.styled';
 import { addContact } from 'redux/contacts/operations';
 import { selectContacts } from 'redux/contacts/selectors';
 
@@ -50,9 +49,9 @@ export const ContactForm = () => {
 
   return (
     <>
-      <Form onSubmit={handleSubmit} autoComplete="off">
-        <Label htmlFor={nameId}>Name</Label>
-        <Input
+      <form onSubmit={handleSubmit} autoComplete="off">
+        <label htmlFor={nameId}>Name</label>
+        <input
           type="text"
           name="name"
           value={name}
@@ -63,8 +62,8 @@ export const ContactForm = () => {
           required
           onChange={handleChangeName}
         />
-        <Label htmlFor={numberId}>Number</Label>
-        <Input
+        <label htmlFor={numberId}>Number</label>
+        <input
           type="tel"
           name="number"
           value={number}
@@ -75,10 +74,10 @@ export const ContactForm = () => {
           required
           onChange={handleChangeNumber}
         />
-        <Button type="submit">
+        <button type="submit">
           <BsPersonPlus size={33} />
-        </Button>
-      </Form>
+        </button>
+      </form>
     </>
   );
 };

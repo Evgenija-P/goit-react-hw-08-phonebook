@@ -1,7 +1,11 @@
+import { Text } from '@chakra-ui/react';
+
 export const Home = () => {
   return (
     <div>
-      <h1>Welcome to the phone book!</h1>
+      <Text fontSize="4xl" mt={50} textAlign={'center'} fontWeight="bold">
+        Welcome to the phone book!
+      </Text>
     </div>
   );
 };

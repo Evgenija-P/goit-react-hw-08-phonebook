@@ -27,14 +27,6 @@ export const TelNumber = styled.a`
   }
 `;
 
-export const Email = styled.a`
-  color: white;
-  :focus,
-  :hover {
-    color: purple;
-  }
-`;
-
 export const Button = styled.button`
   background-color: transparent;
   outline: none;

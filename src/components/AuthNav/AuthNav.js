@@ -1,12 +1,24 @@
+import { Flex, Text } from '@chakra-ui/react';
+// import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { NavLink } from 'react-router-dom';
-import { NavWrapper } from './AuthNav.styled';
-// import css from './AuthNav.module.css';
 
 export const AuthNav = () => {
   return (
-    <NavWrapper>
-      <NavLink to="/register">Register</NavLink>
-      <NavLink to="/login">Log In</NavLink>
-    </NavWrapper>
+    <header>
+      <Flex align="center" justify="space-between">
+        <Flex align="center" justify="space-between" w={180}>
+          <NavLink to="/register">
+            <Text fontSize="24px" fontWeight="bold">
+              Register
+            </Text>
+          </NavLink>
+          <NavLink to="/login">
+            <Text fontSize="24px" fontWeight="bold">
+              Log In
+            </Text>
+          </NavLink>
+        </Flex>
+      </Flex>
+    </header>
   );
 };

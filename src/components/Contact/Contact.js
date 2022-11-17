@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import { BsTelephone, BsXCircle } from 'react-icons/bs';
 import { IoPeopleCircleOutline } from 'react-icons/io5';
 
-import {
-  Item,
-  ContactWrapper,
-  ButtonWrapper,
-  TelNumber,
-  Button,
-} from './Contact.styled';
+// import {
+//   Item,
+//   ContactWrapper,
+//   ButtonWrapper,
+//   TelNumber,
+//   Button,
+// } from './Contact.styled';
 import { deleteContact } from 'redux/contacts/operations';
 
 export const Contact = ({ id, name, number }) => {
@@ -18,24 +18,24 @@ export const Contact = ({ id, name, number }) => {
   const telNumber = 'tel:' + number;
 
   return (
-    <Item>
-      <ContactWrapper>
+    <div>
+      <div>
         <IoPeopleCircleOutline size={50} />
         <div>
           {name}: <p>{number}</p>
         </div>
-      </ContactWrapper>
+      </div>
 
-      <ButtonWrapper>
-        <TelNumber href={telNumber}>
+      <div>
+        <a href={telNumber}>
           <BsTelephone size={33} />
-        </TelNumber>
+        </a>
 
-        <Button type="button" onClick={handleDelete}>
+        <button type="button" onClick={handleDelete}>
           <BsXCircle size={33} />
-        </Button>
-      </ButtonWrapper>
-    </Item>
+        </button>
+      </div>
+    </div>
   );
 };
 

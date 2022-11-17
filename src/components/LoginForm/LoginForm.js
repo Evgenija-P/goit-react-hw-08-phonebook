@@ -1,8 +1,7 @@
 import { useDispatch } from 'react-redux';
-import { Button, Input } from '@chakra-ui/react';
+import { Button, Flex, Input, Text } from '@chakra-ui/react';
 
 import { logIn } from 'redux/auth/operations';
-import { FormWrapper, Label, TitleLabel } from './LoginForm.styled';
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
@@ -20,36 +19,36 @@ export const LoginForm = () => {
   };
 
   return (
-    <FormWrapper onSubmit={handleSubmit} autoComplete="off">
-      <Label>
-        <TitleLabel>Email</TitleLabel>
-        <Input
-          placeholder="Enter Username"
-          colorScheme="whiteAlpha"
-          pr="10rem"
-          borderColor="purple"
-          width="auto"
-          variant="flushed"
-          type="email"
-          name="email"
-        />
-      </Label>
-      <Label>
-        <TitleLabel>Password</TitleLabel>
-        <Input
-          placeholder="Enter password"
-          colorScheme="whiteAlpha"
-          pr="10rem"
-          borderColor="purple"
-          width="auto"
-          variant="flushed"
-          type="password"
-          name="password"
-        />
-      </Label>
-      <Button colorScheme="whiteAlpha" type="submit" variant="outline">
-        Log In
-      </Button>
-    </FormWrapper>
+    <form onSubmit={handleSubmit} autoComplete="off">
+      <Flex align="center" justify="center" gap={7}>
+        <Flex flexDir="column" gap={3}>
+          <label>
+            <Text>Email</Text>
+            <Input
+              placeholder="Enter Username"
+              pr="10rem"
+              borderColor="green.200"
+              width="auto"
+              variant="flushed"
+              type="email"
+              name="email"
+            />
+          </label>
+          <label>
+            <Text>Password</Text>
+            <Input
+              placeholder="Enter password"
+              pr="10rem"
+              borderColor="green.200"
+              width="auto"
+              variant="flushed"
+              type="password"
+              name="password"
+            />
+          </label>
+        </Flex>
+        <Button type="submit">Log In</Button>
+      </Flex>
+    </form>
   );
 };
