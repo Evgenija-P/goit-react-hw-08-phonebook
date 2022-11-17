@@ -18,7 +18,7 @@ export const Home = () => {
         bgGradient="linear(to-l, green.900, green.500, green.200)"
         bgClip="text"
       >
-        Welcome to the phone book!
+        Welcome to the PhoneBook!
       </Heading>
     </div>
   );
