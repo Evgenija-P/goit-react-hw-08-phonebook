@@ -1,5 +1,4 @@
 import { Flex, Text } from '@chakra-ui/react';
-// import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { NavLink } from 'react-router-dom';
 
 export const AuthNav = () => {

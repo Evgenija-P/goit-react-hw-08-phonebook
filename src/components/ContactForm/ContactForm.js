@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { nanoid } from 'nanoid';
-import { BsPersonPlus } from 'react-icons/bs';
 
 import { addContact } from 'redux/contacts/operations';
 import { selectContacts } from 'redux/contacts/selectors';
+import { Flex, Input, Text } from '@chakra-ui/react';
+import { CheckIcon } from '@chakra-ui/icons';
 
 export const ContactForm = () => {
   const nameId = nanoid(3);
@@ -50,33 +51,49 @@ export const ContactForm = () => {
   return (
     <>
       <form onSubmit={handleSubmit} autoComplete="off">
-        <label htmlFor={nameId}>Name</label>
-        <input
-          type="text"
-          name="name"
-          value={name}
-          id={nameId}
-          placeholder="Name"
-          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-          title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-          required
-          onChange={handleChangeName}
-        />
-        <label htmlFor={numberId}>Number</label>
-        <input
-          type="tel"
-          name="number"
-          value={number}
-          id={numberId}
-          placeholder="Number"
-          pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-          title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-          required
-          onChange={handleChangeNumber}
-        />
-        <button type="submit">
-          <BsPersonPlus size={33} />
-        </button>
+        <Flex align="center" justify="center" gap={7}>
+          <Flex flexDir="column" gap={3}>
+            <label htmlFor={nameId}>
+              <Text>Name</Text>
+              <Input
+                type="text"
+                name="name"
+                value={name}
+                id={nameId}
+                placeholder="Name"
+                pr="10rem"
+                borderColor="green.200"
+                width="auto"
+                variant="flushed"
+                pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+                title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+                required
+                onChange={handleChangeName}
+              />
+            </label>
+            <label htmlFor={numberId}>
+              <Text>Number</Text>
+              <Input
+                type="tel"
+                name="number"
+                value={number}
+                id={numberId}
+                pr="10rem"
+                borderColor="green.200"
+                width="auto"
+                variant="flushed"
+                placeholder="Number"
+                pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+                title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+                required
+                onChange={handleChangeNumber}
+              />
+            </label>
+          </Flex>
+          <button type="submit">
+            <CheckIcon w={6} h={6} />
+          </button>
+        </Flex>
       </form>
     </>
   );

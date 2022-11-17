@@ -1,3 +1,4 @@
+import { Button, Flex, Text } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { logOut } from 'redux/auth/operations';
 import { selectUser } from 'redux/auth/selectors';
@@ -7,15 +8,16 @@ export const UserMenu = () => {
   const { user } = useSelector(selectUser);
 
   return (
-    <div>
+    <Flex flexDir="column">
       <div>
-        <p>Welcome, {user.name}! </p>
-        <p>Your email: {user.email}! </p>
+        <Text fontSize="18px" fontWeight="bold">
+          {user.email}
+        </Text>
       </div>
 
-      <button type="button" onClick={() => dispatch(logOut())}>
+      <Button type="button" onClick={() => dispatch(logOut())}>
         Logout
-      </button>
-    </div>
+      </Button>
+    </Flex>
   );
 };

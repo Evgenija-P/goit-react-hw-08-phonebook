@@ -1,16 +1,11 @@
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import { BsTelephone, BsXCircle } from 'react-icons/bs';
+
 import { IoPeopleCircleOutline } from 'react-icons/io5';
 
-// import {
-//   Item,
-//   ContactWrapper,
-//   ButtonWrapper,
-//   TelNumber,
-//   Button,
-// } from './Contact.styled';
 import { deleteContact } from 'redux/contacts/operations';
+import { Flex, Icon, Text } from '@chakra-ui/react';
+import { DeleteIcon, PhoneIcon } from '@chakra-ui/icons';
 
 export const Contact = ({ id, name, number }) => {
   const dispatch = useDispatch();
@@ -18,24 +13,27 @@ export const Contact = ({ id, name, number }) => {
   const telNumber = 'tel:' + number;
 
   return (
-    <div>
-      <div>
-        <IoPeopleCircleOutline size={50} />
-        <div>
-          {name}: <p>{number}</p>
-        </div>
-      </div>
+    <Flex align="center" justify="space-between">
+      <Flex align="center" gap={4}>
+        <Icon as={IoPeopleCircleOutline} w={12} h={12}></Icon>
 
-      <div>
+        <div>
+          <Text fontSize="18px" as="i">
+            Name: {name} <p>Phone number: {number}</p>
+          </Text>
+        </div>
+      </Flex>
+
+      <Flex gap={5}>
         <a href={telNumber}>
-          <BsTelephone size={33} />
+          <PhoneIcon w={6} h={6} />
         </a>
 
         <button type="button" onClick={handleDelete}>
-          <BsXCircle size={33} />
+          <DeleteIcon w={6} h={6} />
         </button>
-      </div>
-    </div>
+      </Flex>
+    </Flex>
   );
 };
 

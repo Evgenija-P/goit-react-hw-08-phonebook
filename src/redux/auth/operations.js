@@ -31,7 +31,7 @@ export const register = createAsyncThunk(
 
       setAuthHeader(response.data.token);
       toast.success('Congratulations! You are registered!', options);
-      console.log(response.data);
+
       return response.data;
     } catch (e) {
       toast.error('Please, try one more');

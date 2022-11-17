@@ -6,8 +6,8 @@ import { ContactForm } from 'components/ContactForm/ContactForm';
 import { Filter } from 'components/Filter/Filter';
 import { ContactList } from 'components/ContactList/ContactList';
 
-import { Title, TitleContacts } from '../components/App/App.styled';
 import { fetchContacts } from 'redux/contacts/operations';
+import { Text, Flex } from '@chakra-ui/react';
 
 export default function Contacts() {
   const dispatch = useDispatch();
@@ -20,10 +20,23 @@ export default function Contacts() {
   return (
     <>
       <div>{isLoading && 'Request in progress...'}</div>
-      <Title>Phonebook</Title>
+      <Flex align="center" justify="center" my={5}>
+        <Text as="b" fontSize="18px">
+          Add new contact
+        </Text>
+      </Flex>
       <ContactForm />
-      <TitleContacts>Contacts</TitleContacts>
+      <Flex align="center" justify="center" my={7}>
+        <Text as="b" fontSize="18px">
+          Find contact
+        </Text>
+      </Flex>
       <Filter />
+      <Flex align="center" justify="center" my={7}>
+        <Text as="b" fontSize="18px">
+          Your contacts
+        </Text>
+      </Flex>
       <ContactList />
     </>
   );

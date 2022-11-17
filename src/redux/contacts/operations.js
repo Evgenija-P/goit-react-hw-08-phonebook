@@ -34,7 +34,6 @@ export const addContact = createAsyncThunk(
         number,
       });
       toast.success('Сontact added!', options);
-      console.log(response.data);
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
